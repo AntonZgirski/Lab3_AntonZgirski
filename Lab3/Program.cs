@@ -1,4 +1,7 @@
 ﻿using System;
+using Computer_Class;
+using CashIn_Class;
+
 
 namespace Lab3
 {
@@ -6,72 +9,28 @@ namespace Lab3
   {
     static void Main(string[] args)
     {
-      var mother = new Phone
+      //var com1 = new Computer();
+      //com1.Print();
+      //var com2 = new Computer(0.0, "");
+      //com2.Print();
+
+      var cashIn1 = new CashIn();
+      cashIn1.AddCashIn(10,10,10,"USD");
+      char exit = 'Y';
+      Console.WriteLine("Бакномат TeachMeSkills\nДоступыне валюты для снятия денег:\nUSD\nEUR\nBYN\n");
+      do
       {
-        number = "+375-29-123-45-67",
-        model = "Samsung",
-        weight = 800.00
-      };
-
-      var dad = new Phone();
-      dad.number = "+375-29-765-43-21";
-      dad.model = "IPhone";
-      dad.weight = 867.12;
-
-      var son = new Phone();
-      son.number = "+375-29-547-36-38";
-      son.model = "Nokia";
-      son.weight = 925.12;
-
-      mother.Print();
-      dad.Print();
-      son.Print();
-
-      mother.RecieveCall("Mother");
-      dad.RecieveCall("Dad");
-      son.RecieveCall("Son");
-      
-      mother.RecieveCall("Mother",mother.GetNumber());
-      dad.RecieveCall("Dad", dad.GetNumber());
-      son.RecieveCall("Son", son.GetNumber());
-
-      Console.WriteLine();
-
-      var message = new Phone();
-      message.SendMessage(mother.GetNumber(), dad.GetNumber(), son.GetNumber());
-            
-      //Console.WriteLine(mother.GetNumber()); 
-      //Console.WriteLine(dad.GetNumber());
-      //Console.WriteLine(son.GetNumber());
+        Console.WriteLine("Выберите валюту: ");
+        string ccyr = Console.ReadLine();
+        if (!cashIn1.PrintInfo(ccyr)) continue;
+        Console.Write("Введите сумму: ");
+        int sumOut = Convert.ToInt32(Console.ReadLine());
+        Console.WriteLine();
+        if (cashIn1.OutCashIn(sumOut, ccyr)) cashIn1.PrintCheck(sumOut, ccyr);
+        else Console.WriteLine($"В банкомате не достаточно средств для снятия {sumOut.ToString()} {ccyr.ToUpper()}.\n");
+        Console.WriteLine($"Выполнить еще одну операцию?(Y,N): ");
+        exit = Convert.ToChar(Console.ReadLine());
+      } while (exit == 'Y');
     }
-  }
-  class Phone
-  {
-    public string number;
-    public string model;
-    public double weight;
-    public void Print()
-    {
-      Console.WriteLine($"Number: {number}. Model: {model}. Weight: {weight} gram.");
-    }
-    public void RecieveCall(string name)
-    {
-      Console.WriteLine($"Calling {name}.");
-    }
-    public void RecieveCall(string name, string number)
-    {
-      Console.WriteLine($"Calling {name}. Number {number}.");
-    }
-    public string GetNumber()
-    {
-      return number;
-    }
-    public void SendMessage(params string[] elem)
-    {
-      foreach(var el in elem)
-      {
-        Console.WriteLine(el);
-      }
-    }
-  }
+  } 
 }
