@@ -1,6 +1,7 @@
 ﻿using System;
 using Computer_Class;
 using CashIn_Class;
+using Hospital_Class;
 
 
 namespace Lab3
@@ -9,13 +10,15 @@ namespace Lab3
   {
     static void Main(string[] args)
     {
-      //var com1 = new Computer();
-      //com1.Print();
-      //var com2 = new Computer(0.0, "");
-      //com2.Print();
+      // 1
+      var com1 = new Computer();
+      com1.Print();
+      var com2 = new Computer(0.0, "");
+      com2.Print();
 
+      // 2
       var cashIn1 = new CashIn();
-      cashIn1.AddCashIn(10,10,10,"USD");
+      cashIn1.AddCashIn(10, 10, 10, "USD");
       char exit = 'Y';
       Console.WriteLine("Бакномат TeachMeSkills\nДоступыне валюты для снятия денег:\nUSD\nEUR\nBYN\n");
       do
@@ -31,6 +34,10 @@ namespace Lab3
         Console.WriteLine($"Выполнить еще одну операцию?(Y,N): ");
         exit = Convert.ToChar(Console.ReadLine());
       } while (exit == 'Y');
+
+      // 3
+      var hospital = new Hospital();
+      hospital.plan.Treat();
     }
   } 
 }
